@@ -434,6 +434,6 @@ SafeCore is designed for embedded systems developers who need reliable, determin
 
 ---
 
-**Version**: 4.0.0  
+**Version**: 0.0.4
 **Last Updated**: October 31, 2025  
 **Maintained by**: LyuRongjian
