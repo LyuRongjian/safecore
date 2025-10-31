@@ -1,71 +1,78 @@
+/*
+ * safecore_config.h
+ * 
+ * SafeCore Configuration File
+ * This file contains all configuration options for the SafeCore framework
+ * allowing customization of features, sizes, and behavior.
+ */
 #ifndef SAFECORE_CONFIG_H
 #define SAFECORE_CONFIG_H
 
 #include <stdint.h>
 
-/* === 版本控制 === */
+/* === Version Control === */
 #define SAFECORE_VERSION_MAJOR    4
 #define SAFECORE_VERSION_MINOR    0
 #define SAFECORE_VERSION_PATCH    0
 
-/* === 基础框架配置（v2.0）=== */
-#define SAFECORE_BASIC_ENABLED                1   /* 基础事件总线 + 状态机 */
-#define SAFECORE_MAX_HSM_DEPTH                4   /* HSM 最大深度 */
-#define SAFECORE_ENTRY_EXIT_ENABLED           1   /* 状态机 entry/exit */
-#define SAFECORE_EVENT_QUEUE_SIZE             32  /* 基础队列大小 */
-#define SAFECORE_MAX_EVENT_SIZE               16  /* 最大事件大小 */
-#define SAFECORE_MAX_SUBSCRIBERS              8   /* 最大订阅者数 */
-#define SAFECORE_MAX_EVENT_TYPES              16  /* 最大事件类型数 */
+/* === Basic Framework Configuration === */
+#define SAFECORE_BASIC_ENABLED               1   /* Basic event bus + state machine */
+#define SAFECORE_MAX_HSM_DEPTH               4   /* HSM maximum depth */
+#define SAFECORE_ENTRY_EXIT_ENABLED          1   /* State machine entry/exit events */
+#define SAFECORE_EVENT_QUEUE_SIZE            32  /* Basic queue size (must be power of 2) */
+#define SAFECORE_MAX_EVENT_SIZE              16  /* Maximum event size in bytes */
+#define SAFECORE_MAX_SUBSCRIBERS             8   /* Maximum number of subscribers */
+#define SAFECORE_MAX_EVENT_TYPES             16  /* Maximum number of event types */
 
-/* === 优先级队列配置（v3.0）=== */
-#define SAFECORE_PRIORITY_ENABLED             1   /* 多优先级队列 */
-#define SAFECORE_EVENT_PRIORITIES             3   /* 0=紧急,1=标准,2=低优先级 */
-#define SAFECORE_EMERGENCY_PRIORITY           0
-#define SAFECORE_STANDARD_PRIORITY            1
-#define SAFECORE_LOW_PRIORITY                 2
-#define SAFECORE_MAX_EVENTS_PER_CYCLE         10  /* 每优先级单次最大处理数 */
+/* === Priority Queue Configuration === */
+#define SAFECORE_PRIORITY_ENABLED            1   /* Multiple priority queues */
+#define SAFECORE_EVENT_PRIORITIES            3   /* 0=emergency, 1=standard, 2=low priority */
+#define SAFECORE_EMERGENCY_PRIORITY          0
+#define SAFECORE_STANDARD_PRIORITY           1
+#define SAFECORE_LOW_PRIORITY                2
+#define SAFECORE_MAX_EVENTS_PER_CYCLE        10  /* Maximum processed per priority per cycle */
 
-/* === 事件过滤配置（v3.0）=== */
-#define SAFECORE_FILTERS_ENABLED              1   /* 事件过滤器 */
-#define SAFECORE_MAX_FILTER_RULES             8   /* 最大过滤规则数 */
+/* === Event Filters Configuration === */
+#define SAFECORE_FILTERS_ENABLED             1   /* Event filters */
+#define SAFECORE_MAX_FILTER_RULES            8   /* Maximum number of filter rules */
 
-/* === 诊断系统配置（v4.0）=== */
-#define SAFECORE_DIAGNOSTICS_ENABLED          0   /* 诊断系统（汽车级） */
-#define SAFECORE_MAX_DTCS                     128 /* 最大 DTC 数量 */
-#define SAFECORE_DTC_STORAGE_SIZE             256 /* DTC 存储空间 */
-#define SAFECORE_SELF_TEST_ENABLED            0   /* 自检功能 */
+/* === Diagnostics System Configuration === */
+#define SAFECORE_DIAGNOSTICS_ENABLED         0   /* Diagnostics system (automotive grade) */
+#define SAFECORE_MAX_DTCS                    128 /* Maximum DTC count */
+#define SAFECORE_DTC_STORAGE_SIZE            256 /* DTC storage size */
+#define SAFECORE_SELF_TEST_ENABLED           0   /* Self-test functionality */
 
-/* === AUTOSAR 兼容配置（v4.0）=== */
-#define SAFECORE_AUTOSAR_ENABLED              0   /* AUTOSAR BSW 兼容 */
-#define SAFECORE_AUTOSAR_VERSION_MAJOR        4
-#define SAFECORE_AUTOSAR_VERSION_MINOR        4
+/* === AUTOSAR Compatibility Configuration === */
+#define SAFECORE_AUTOSAR_ENABLED             0   /* AUTOSAR BSW compatibility */
+#define SAFECORE_AUTOSAR_VERSION_MAJOR       4
+#define SAFECORE_AUTOSAR_VERSION_MINOR       4
 
-/* === 通信协议配置（v4.0）=== */
-#define SAFECORE_COMM_ENABLED                 0   /* 通信桥接 */
-#define SAFECORE_CAN_ENABLED                  0   /* CAN 支持 */
-#define SAFECORE_LIN_ENABLED                  0   /* LIN 支持 */
-#define SAFECORE_UDS_ENABLED                  0   /* UDS 诊断支持 */
+/* === Communication Protocol Configuration === */
+#define SAFECORE_COMM_ENABLED                0   /* Communication bridge */
+#define SAFECORE_CAN_ENABLED                 0   /* CAN support */
+#define SAFECORE_LIN_ENABLED                 0   /* LIN support */
+#define SAFECORE_UDS_ENABLED                 0   /* UDS diagnostics support */
 
-/* === 安全机制配置（v4.0）=== */
-#define SAFECORE_SAFETY_ENABLED               0   /* 安全机制 */
-#define SAFECORE_WATCHDOG_INTEGRATION         0   /* 看门狗集成 */
-#define SAFECORE_MEMORY_PROTECTION            0   /* 内存保护 */
-#define SAFECORE_RUNTIME_CHECKS               0   /* 运行时检查 */
+/* === Safety Mechanisms Configuration === */
+#define SAFECORE_SAFETY_ENABLED              0   /* Safety mechanisms */
+#define SAFECORE_WATCHDOG_INTEGRATION        0   /* Watchdog integration */
+#define SAFECORE_MEMORY_PROTECTION           0   /* Memory protection */
+#define SAFECORE_RUNTIME_CHECKS              0   /* Runtime checks */
 
-/* === 性能与安全配置 === */
-#define SAFECORE_QUEUE_OVERFLOW_POLICY        1   /* 0=丢新,1=丢旧,2=恐慌 */
-#define SAFECORE_MAX_PROCESS_TIME_MS          10  /* 主循环处理超时 */
-#define SAFECORE_LOG_ENABLED                  1   /* 日志输出 */
+/* === Performance and Safety Configuration === */
+#define SAFECORE_QUEUE_OVERFLOW_POLICY       1   /* 0=drop newest, 1=drop oldest, 2=panic */
+#define SAFECORE_MAX_PROCESS_TIME_MS         10  /* Main loop processing timeout */
+#define SAFECORE_LOG_ENABLED                 1   /* Log output */
 
-/* === MISRA-C 2012 兼容性 === */
-#define SAFECORE_MISRA_COMPLIANT              1   /* MISRA-C 2012 合规 */
+/* === MISRA-C 2012 Compliance === */
+#define SAFECORE_MISRA_COMPLIANT             1   /* MISRA-C 2012 compliance */
 
-/* === 队列策略宏定义 === */
-#define SAFECORE_QUEUE_DROP_NEWEST            0
-#define SAFECORE_QUEUE_DROP_OLDEST            1
-#define SAFECORE_QUEUE_PANIC                  2
+/* === Queue Policy Macros === */
+#define SAFECORE_QUEUE_DROP_NEWEST           0
+#define SAFECORE_QUEUE_DROP_OLDEST           1
+#define SAFECORE_QUEUE_PANIC                 2
 
-/* === 安全钩子宏 === */
+/* === Safety Hook Macros === */
 #ifndef SAFECORE_ON_ERROR
 #define SAFECORE_ON_ERROR(msg) do { \
     extern void safecore_error_handler(const char*); \
@@ -73,12 +80,55 @@
 } while(0)
 #endif
 
-/* === 日志宏 === */
+/* === Logging Macros === */
 #if SAFECORE_LOG_ENABLED
 #include <stdio.h>
 #define SC_LOG(fmt, ...) printf("[SafeCore] " fmt "\n", ##__VA_ARGS__)
 #else
 #define SC_LOG(...)
+#endif
+
+/* === Compiler Optimization Hints === */
+#if defined(__GNUC__) || defined(__clang__)
+    #define SAFECORE_ALWAYS_INLINE __attribute__((always_inline))
+    #define SAFECORE_PACKED __attribute__((packed))
+#else
+    #define SAFECORE_ALWAYS_INLINE
+    #define SAFECORE_PACKED
+#endif
+
+/* === Inline Function Hints === */
+#define SAFECORE_INLINE static inline SAFECORE_ALWAYS_INLINE
+
+/* === Compile-time Assertion for Critical Constraints === */
+#include "safecore_module_config.h"
+
+/* Ensure queue size is power of two */
+SC_STATIC_ASSERT((SAFECORE_EVENT_QUEUE_SIZE & (SAFECORE_EVENT_QUEUE_SIZE - 1)) == 0, 
+                 safecore_event_queue_size_must_be_power_of_two);
+
+/* Ensure maximum event size is not zero */
+SC_STATIC_ASSERT(SAFECORE_MAX_EVENT_SIZE > 0, 
+                 safecore_max_event_size_must_be_greater_than_zero);
+
+/* Ensure maximum subscribers count is not zero */
+SC_STATIC_ASSERT(SAFECORE_MAX_SUBSCRIBERS > 0, 
+                 safecore_max_subscribers_must_be_greater_than_zero);
+
+/* Ensure maximum event types count is not zero */
+SC_STATIC_ASSERT(SAFECORE_MAX_EVENT_TYPES > 0, 
+                 safecore_max_event_types_must_be_greater_than_zero);
+
+/* When priority is enabled, ensure priority count is within valid range */
+#if SAFECORE_PRIORITY_ENABLED == 1
+SC_STATIC_ASSERT(SAFECORE_EVENT_PRIORITIES > 0 && SAFECORE_EVENT_PRIORITIES <= 8, 
+                 safecore_event_priorities_must_be_between_1_and_8);
+#endif
+
+/* When filters are enabled, ensure maximum filter rules count is not zero */
+#if SAFECORE_FILTERS_ENABLED == 1
+SC_STATIC_ASSERT(SAFECORE_MAX_FILTER_RULES > 0, 
+                 safecore_max_filter_rules_must_be_greater_than_zero);
 #endif
 
 #endif /* SAFECORE_CONFIG_H */

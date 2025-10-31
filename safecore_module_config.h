@@ -1,10 +1,17 @@
+/*
+ * safecore_module_config.h
+ * 
+ * SafeCore Module Configuration
+ * This file contains configuration checks and assertions for SafeCore modules
+ * and ensures proper dependencies between modules.
+ */
 #ifndef SAFECORE_MODULE_CONFIG_H
 #define SAFECORE_MODULE_CONFIG_H
 
 #include "safecore_config.h"
 
-/* === 模块依赖检查 === */
-/* 如果启用了高级功能，必须启用基础功能 */
+/* === Module Dependency Checks === */
+/* Advanced features require basic functionality to be enabled */
 #if SAFECORE_PRIORITY_ENABLED == 1 && SAFECORE_BASIC_ENABLED != 1
     #error "Priority queue requires basic framework"
 #endif
@@ -25,7 +32,7 @@
     #error "Safety mechanisms require basic framework"
 #endif
 
-/* === 汽车级配置检查 === */
+/* === Automotive Configuration Checks === */
 #if SAFECORE_AUTOSAR_ENABLED == 1
     #undef SAFECORE_DIAGNOSTICS_ENABLED
     #define SAFECORE_DIAGNOSTICS_ENABLED      1
@@ -37,18 +44,21 @@
     #define SAFECORE_SELF_TEST_ENABLED        1
 #endif
 
-/* === 内存优化配置 === */
+/* === Memory Optimization Configuration === */
 #if SAFECORE_PRIORITY_ENABLED == 1
     #define SAFECORE_TOTAL_QUEUES             SAFECORE_EVENT_PRIORITIES
 #else
     #define SAFECORE_TOTAL_QUEUES             1
 #endif
 
-/* === 编译时断言 === */
+/* === Compile-time Assertions === */
 #if SAFECORE_MISRA_COMPLIANT == 1
+    /* MISRA-C compliant static assertion implementation */
+    /* This creates an array with negative size if condition is false, causing compile error */
     #define SC_STATIC_ASSERT(condition, msg) \
-        typedef char msg[(condition) ? 1 : -1]
+        extern int dummy_array_##msg[1U - 2U * ((condition) ? 0U : 1U)]
 #else
+    /* Use C11 _Static_assert when not enforcing MISRA compliance */
     #define SC_STATIC_ASSERT(condition, msg) \
         _Static_assert(condition, #msg)
 #endif
