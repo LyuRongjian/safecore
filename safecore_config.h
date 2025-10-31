@@ -11,9 +11,9 @@
 #include <stdint.h>
 
 /* === Version Control === */
-#define SAFECORE_VERSION_MAJOR    4
+#define SAFECORE_VERSION_MAJOR    0
 #define SAFECORE_VERSION_MINOR    0
-#define SAFECORE_VERSION_PATCH    0
+#define SAFECORE_VERSION_PATCH    4
 
 /* === Basic Framework Configuration === */
 #define SAFECORE_BASIC_ENABLED               1   /* Basic event bus + state machine */

@@ -1,6 +1,6 @@
 # SafeCore Framework
 
-![Version](https://img.shields.io/badge/version-4.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-0.0.4-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/platform-embedded-orange.svg)
 
@@ -104,9 +104,9 @@ SafeCore is highly configurable through `safecore_config.h`. Key configuration o
 
 ### Framework Version
 ```c
-#define SAFECORE_VERSION_MAJOR    4
+#define SAFECORE_VERSION_MAJOR    0
 #define SAFECORE_VERSION_MINOR    0
-#define SAFECORE_VERSION_PATCH    0
+#define SAFECORE_VERSION_PATCH    4
 ```
 
 ### Core Features
