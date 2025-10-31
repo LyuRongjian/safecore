@@ -9,20 +9,13 @@
 extern "C" {
 #endif
 
-// 事件基类（必须是第一个成员）
-typedef struct {
-    uint8_t id;
-    uint8_t priority;      // 0 = highest
-    uint32_t timestamp;
-} sc_event_t;
-
-// 状态机事件（内部使用）
+// 事件类型定义
 typedef enum {
-    SC_SM_EVENT_INIT = 0,
-    SC_SM_EVENT_ENTRY,
-    SC_SM_EVENT_EXIT,
-    SC_SM_EVENT_TICK,
-    SC_SM_EVENT_USER_START = 16
+    SC_EVENT_INIT = 0,
+    SC_EVENT_ENTRY,
+    SC_EVENT_EXIT,
+    SC_EVENT_TICK,
+    SC_EVENT_USER_START = 16
 } sc_sm_event_type_t;
 
 typedef struct {
@@ -36,6 +29,15 @@ typedef struct {
     } data;
 } sc_sm_event_t;
 
+// 通用事件基类（必须在第一个成员）
+typedef struct {
+    uint8_t id;              // 事件ID
+    uint8_t priority;        // 优先级 (0=紧急, 1=标准, 2=低)
+    uint8_t size;            // 实际大小（用于过滤）
+    uint32_t timestamp;      // 时间戳
+} sc_event_t;
+
+// 状态机结果
 typedef enum {
     SC_SM_HANDLED,
     SC_SM_TRANSITION,
@@ -43,6 +45,9 @@ typedef enum {
 } sc_sm_result_t;
 
 typedef sc_sm_result_t (*sc_sm_handler_t)(void *ctx, const sc_sm_event_t *e, void **next_state);
+
+// 订阅者回调
+typedef void (*sc_subscriber_fn_t)(const sc_event_t *e, void *ctx);
 
 #ifdef __cplusplus
 }
